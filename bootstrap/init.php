@@ -1,4 +1,5 @@
 <?php
+session_start();
     include "constants.php";
     include MAP_PATH ."bootstrap/config.php";
     include MAP_PATH ."libs/helpers.php";
@@ -11,3 +12,6 @@ try {
      echo "ERROR!";
      die();
 }
+
+include MAP_PATH ."libs/lib-users.php";
+include MAP_PATH ."libs/lib-location.php";

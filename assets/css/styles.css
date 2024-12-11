@@ -35,6 +35,14 @@ body,
     text-align: right;
 }
 
+* {
+    font-family: sahel;
+}
+
+*:focus {
+    outline: none;
+}
+
 .mapContainer {
     position: fixed;
     top: 0;
@@ -70,4 +78,197 @@ body,
     font-family: sahel;
     opacity: 0.9;
     outline: 0;
+    width: 400px;
 }
+
+
+/* Modal Overlay Styles */
+
+.modal-overlay {
+    position: fixed;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.7);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modal-overlay .modal {
+    width: 50%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 7px;
+    margin-top: -100px;
+    position: relative;
+}
+
+.modal-overlay .modal .close {
+    position: absolute;
+    top: 7px;
+    left: 15px;
+    color: #a90909;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.modal-overlay .modal h3.modal-title {
+    padding: 0;
+    margin: 0 0 30px 0;
+}
+
+.modal-overlay .modal h3.modal-content {}
+
+.field-row {
+    margin: 10px 0;
+}
+
+.field-row::after {
+    content: ' ';
+    display: block;
+    clear: both;
+    width: 100%;
+}
+
+.field-row div.field-title {
+    width: 20%;
+    float: right;
+}
+
+.field-row div.field-content {
+    width: 80%;
+    float: right;
+}
+
+.field-row textarea,
+.field-row select,
+.field-row input {
+    line-height: 36px;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #e7e7e7;
+    font-size: 16px;
+    font-weight: 400;
+    width: 97%;
+}
+
+input[type="submit"] {
+    background: #007bec;
+    color: #fff;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    opacity: 0.7;
+}
+
+
+/* Search Box new */
+
+.clear {
+    clear: both;
+}
+
+.search-box {
+    width: fit-content;
+}
+
+.search-results {
+    margin: -3px 50px 0 0;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 12px;
+    border-radius: 0 0 10px 10px;
+    border: 1px solid #d9d7d4;
+}
+
+.result-item {
+    padding: 10px 5px;
+    border-bottom: 0px solid #f2f2f2;
+    max-width: 400px;
+}
+
+.result-item:hover {
+    background: #f2f2f2;
+    cursor: pointer;
+}
+
+.result-item span,
+.result-item a {
+    display: inline-block;
+}
+
+.result-item span.loc-type {
+    background: #149999;
+    color: #fff;
+    padding: 0px 7px 2px 7px;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+.result-item span.loc-title {
+    font-size: 15px;
+}
+
+img.currentLoc {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 999;
+    width: 32px;
+    background: rgba(242, 209, 99, 0.8);
+    padding: 7px;
+    border-radius: 30px;
+    box-shadow: 1px 2px 13px #777;
+}
+
+img.currentLoc:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.search-results a {
+    text-decoration: none;
+    color: #333;
+}
+  /* استایل پیام موفقیت */
+  .success-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background-color: #d4edda; /* رنگ پس‌زمینه موفقیت */
+    color: #155724; /* رنگ متن */
+    border: 1px solid #c3e6cb; /* رنگ حاشیه */
+    border-radius: 5px; /* گوشه‌های گرد */
+    padding: 15px 20px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+  }
+    /* استایل پیام خطا */
+    .error-message {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        background-color: #f8d7da; /* رنگ پس‌زمینه خطا */
+        color: #721c24; /* رنگ متن */
+        border: 1px solid #f5c6cb; /* رنگ حاشیه */
+        border-radius: 5px; /* گوشه‌های گرد */
+        padding: 15px 20px;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+      }

@@ -5,3 +5,8 @@ $config_database = (object)[
     "user" => "root",
     "db" => "map.pro"
 ];
+
+
+$admins = [
+    "mohammadreza" => "1234"
+];
