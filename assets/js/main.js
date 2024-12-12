@@ -33,6 +33,7 @@ function locate(){
     map.locate({setView : true , maxZoom : defaultZoomMax});
 
 }
+
 // setInterval(locate,22000);
 
 map.on("dblclick",function(event){
