@@ -69,7 +69,10 @@
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/main.js<?="?v=" . rand(1010,100000) ?>"></script>
     <script>
-
+        <?php if($location): ?>
+            L.marker([<?= $location->lat; ?>,<?= $location->lng; ?>]).addTo(map)
+            .bindPopup("<?=$location->title; ?>").openPopup();
+        <?php endif; ?>
     </script>
 </body>
 

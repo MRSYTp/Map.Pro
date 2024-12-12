@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>7Map Panel</title>
-    <link href="favicon.png" rel="shortcut icon" type="image/png">
+    <title>Map Pro Login</title>
+    <link href="assets/favicon.png" rel="shortcut icon" type="image/png">
 
     <link rel="stylesheet" href="assets/css/styles.css<?="?v=" . rand(99, 9999999)?>" />
     <style>
@@ -46,7 +46,7 @@
 </head>
 <body>
     <div class="main-panel">
-    <h1>ورود به پنل مدیریت <span style="color:#007bec">سون مپ</span></h1>
+    <h1>ورود به پنل مدیریت <span style="color:#007bec">Map PRO</span></h1>
         <div class="box">
             <form action="<?= site_url("adm.php") ?>" method="post">
                 <input type="text" name="username" placeholder="Username" autocomplete="off"><br>

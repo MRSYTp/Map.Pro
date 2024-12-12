@@ -23,6 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 if (isLogedIn()) {
+    $params = $_GET ?? [];
+    $locations = getLocations($params);
     include MAP_PATH . "template/tpl-adm.php";
 }else {
     include MAP_PATH . "template/tpl-adm-form.php";

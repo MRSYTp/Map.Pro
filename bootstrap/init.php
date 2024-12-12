@@ -3,7 +3,7 @@ session_start();
     include "constants.php";
     include MAP_PATH ."bootstrap/config.php";
     include MAP_PATH ."libs/helpers.php";
-    // include MAP_PATH ."vendor/autoload.php";
+    include MAP_PATH ."vendor/autoload.php";
 
     // var_dump($config_database);
 try {

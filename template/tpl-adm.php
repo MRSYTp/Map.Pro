@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>7Map Panel</title>
-    <link href="favicon.png" rel="shortcut icon" type="image/png">
+    <title>Map Pro Panel</title>
+    <link href="assets/favicon.png" rel="shortcut icon" type="image/png">
 
     <link rel="stylesheet" href="assets/css/styles.css<?="?v=" . rand(99, 9999999)?>" />
     <link rel="stylesheet" href="assets/css/style-panel.css<?="?v=" . rand(99, 9999999)?>" />
@@ -33,20 +33,20 @@
         </tr>
         </thead>
         <tbody>
-
+        <?php foreach($locations as $location):?>
         <tr>
-            <td>llllll</td>
-            <td class="text-center">ssssss</td>
-            <td class="text-center">ddddddd</td>
-            <td class="text-center">fffffff</td>
+            <td><?= $location->title ?></td>
+            <td class="text-center"><?= verta($location->created_at)->format('d/M/Y'); ?></td>
+            <td class="text-center"><?= $location->lat ?></td>
+            <td class="text-center"><?= $location->lng ?></td>
             <td>
-                <button class="statusToggle " data-loc=''>
+                <button  class="statusToggle <?= $location->verified ? "active" : "" ; ?> " data-loc='<?= $location->id ?>'>
                     تایید
                 </button> 
-                <button class="preview" data-loc=''>👁️‍🗨️</button> 
+                <button class="preview" data-loc='<?= $location->id ?>'>👁️‍🗨️</button> 
             </td>
         </tr>
-    
+        <?php endforeach; ?>
         </tbody>
         </table>
         </div>
@@ -54,7 +54,7 @@
     </div>
 
     <div class="modal-overlay" style="display: none;">
-        <div class="modal" style="width: 70%; height: 400px;">
+        <div class="modal" style="width: 70%; height: 500px;">
             <span class="close">x</span>
             <div class="modal-content">
                 <iframe id='mapWivdow' src="#" frameborder="0"></iframe>
@@ -64,5 +64,40 @@
 
 
     <script src="assets/js/jquery.min.js"></script>
+    <script>
+
+            $(document).ready(function() {
+                $('.preview').click(function() {
+                    $('.modal-overlay').fadeIn();
+                    $('#mapWivdow').attr('src','<?=MAP_URL?>?loc=' + $(this).attr('data-loc'));
+                });
+                $('button.statusToggle').click(function() {
+                    const btn = $(this);
+                    const locId = btn.attr("data-loc");
+
+
+                    $.ajax({
+                        url: "<?= MAP_URL . 'process/toggleLocation.php' ?>",
+                        method: "POST",
+                        data: { locid: locId },
+                        success: function(response) {
+                            if (response == 1) {
+                                btn.toggleClass('active');
+                            }else{
+                                alert(response);
+                            }
+                        },
+                        error: function() {
+                            alert("مشکلی در ارتباط با سرور وجود دارد.");
+                        }
+                    });
+                });
+
+
+                $('.modal-overlay .close').click(function() {
+                    $('.modal-overlay').fadeOut();
+                });
+            });
+    </script>
 </body>
 </html>

@@ -20,3 +20,34 @@ function insertLocation($data){
     }
 
 }
+
+
+function getLocations($params = []){
+    global $conn;
+    $condition = '';
+    if(isset($params['verified'])  &&  in_array($params['verified'],["0","1"])){
+        $condition = "WHERE verified={$params['verified']}";
+    }
+    $query = "SELECT * FROM `locations` $condition";
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+
+
+
+function getLocationByID($id){
+    global $conn;
+    $query = "SELECT * FROM `locations` WHERE id = :ID ";
+    $stmt = $conn->prepare($query);
+    $stmt->execute([":ID" => $id]);
+    return $stmt->fetch(PDO::FETCH_OBJ);
+}
+
+function toggleVerifiedLocation($id){
+    global $conn;
+    $query = "UPDATE locations SET verified = 1 - verified WHERE id = :ID ";
+    $stmt = $conn->prepare($query);
+    $stmt->execute([":ID" => $id]);
+    return $stmt->rowCount();
+}

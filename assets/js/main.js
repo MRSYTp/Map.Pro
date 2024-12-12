@@ -45,6 +45,7 @@ map.on("dblclick",function(event){
     $("#lng-display").val(event.latlng.lng);
     $("#l-type").val(0);
     $("#l-title").val('');
+    $('.ajax-result').html("");
 
 });
 
