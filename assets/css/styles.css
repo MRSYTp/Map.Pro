@@ -225,6 +225,22 @@ img.currentLoc {
     box-shadow: 1px 2px 13px #777;
 }
 
+img.showAllLoc {
+    position: fixed;
+    bottom: 80px;
+    left: 20px;
+    z-index: 999;
+    width: 32px;
+    background: rgba(163, 74, 101, 0.8);
+    padding: 7px;
+    border-radius: 30px;
+    box-shadow: 1px 2px 13px #777;
+}
+img.showAllLoc:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
 img.currentLoc:hover {
     cursor: pointer;
     opacity: 0.7;

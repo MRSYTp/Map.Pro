@@ -56,6 +56,8 @@ $(document).ready(function(){
         $(".modal-overlay").fadeOut();
     });
 
+
+
     $("form#addLocationForm").submit(function(e){
         e.preventDefault();
         var form = $(this);
@@ -65,13 +67,18 @@ $(document).ready(function(){
             data : form.serialize(),
             success : function(response){
                 if (response == 1) {
+
                     form.find(".ajax-result").html("مکان مورد نظر با موفقیت ثبت شد منتظر تایید باشید.");
+                    
                 }else{
                     alert(response);
                 }
             }
         });
     });
+
+
+
 });
 
 

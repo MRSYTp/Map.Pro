@@ -3,8 +3,12 @@
 include "../bootstrap/init.php";
 
 if (isAjaxRequest()) {
-    // var_dump($_POST);
+    
+    if (isset($_POST['email'],$_POST['name']) && !empty($_POST['email'])) {
+        echo insertLocation($_POST);
+    }else {
+        echo "نام و ایمیل را وارد کنید.";
+    }
 
-    echo insertLocation($_POST);
 
 }

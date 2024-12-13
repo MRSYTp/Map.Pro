@@ -1,2 +1,2 @@
-/vendo/
-/composer.lock/
+vendor/
+composer.lock/
