@@ -236,11 +236,26 @@ img.showAllLoc {
     border-radius: 30px;
     box-shadow: 1px 2px 13px #777;
 }
+img.nearUserLoc{
+    position: fixed;
+    bottom: 140px;
+    left: 20px;
+    z-index: 999;
+    width: 32px;
+    background: rgba(69, 117, 189, 0.8);
+    padding: 7px;
+    border-radius: 30px;
+    box-shadow: 1px 2px 13px #777;
+}
+
+img.nearUserLoc:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
 img.showAllLoc:hover {
     cursor: pointer;
     opacity: 0.7;
 }
-
 img.currentLoc:hover {
     cursor: pointer;
     opacity: 0.7;

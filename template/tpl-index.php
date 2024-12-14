@@ -25,8 +25,9 @@
         <div class="mapContainer">
             <div id="map"></div>
         </div>
+        <img src="assets/img/nearLocation.png" id="find-locations" class="nearUserLoc">
         <img src="assets/img/finder.png" id="showAllLocations" class="showAllLoc">
-        <img src="assets/img/current.png" id="find-locations" class="currentLoc">
+        <img src="assets/img/current.png" class="currentLoc">
     </div>
 
 
@@ -86,51 +87,9 @@
 
 
     
-    <script src="assets/js/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="assets/js/main.js<?="?v=" . rand(1010,100000) ?>"></script>
     <script>
-
-
-            document.getElementById('find-locations').addEventListener('click', () => {
-                // مکان‌یابی کاربر
-                navigator.geolocation.getCurrentPosition((position) => {
-                    const userLat = position.coords.latitude; // عرض جغرافیایی کاربر
-                    const userLng = position.coords.longitude; // طول جغرافیایی کاربر
-                    
-                    // شعاع جستجو (10 کیلومتر)
-                    const radius = 10;
-
-                    // نمایش مکان فعلی کاربر روی نقشه
-                    const userLocationMarker = L.marker([userLat, userLng]).addTo(map);
-                    userLocationMarker.bindPopup('Your Location').openPopup();
-
-                    
-                    
-                    // ارسال مختصات و شعاع به سرور
-                    fetch('<?= MAP_URL . 'process/get_locations.php' ?>', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            latitude: userLat,
-                            longitude: userLng,
-                            radius: radius
-                        })
-                    })
-                    .then((response) => response.json())
-                    .then((locations) => {
-                        console.log('Nearby Locations:', locations);
-                        // مکان‌های نزدیک را روی نقشه نمایش دهید
-                        locations.forEach((location) => {
-                            const marker = L.marker([location.lat, location.lng]).addTo(map);
-                            marker.bindPopup(location.title).openPopup();
-                        });
-                    })
-                    .catch((error) => console.error('Error fetching locations:', error));
-                });
-            });
-
-
-
         document.getElementById('showAllLocations').addEventListener('click', () => {
             // Function to fetch and display markers
             function fetchMarkers(bounds) {
@@ -177,14 +136,57 @@
         });
         
 
-
-
-
         <?php if($location): ?>
             L.marker([<?= $location->lat; ?>,<?= $location->lng; ?>]).addTo(map)
             .bindPopup("<?=$location->title; ?>").openPopup();
         <?php endif; ?>
         $(document).ready(function(){
+
+            
+            // اتصال فانکشن به کلیک روی دکمه یا تصویر
+            $('#find-locations').on('click', function () {
+                // مکان‌یابی کاربر
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        const userLat = position.coords.latitude; // عرض جغرافیایی کاربر
+                        const userLng = position.coords.longitude; // طول جغرافیایی کاربر
+                        
+                        // شعاع جستجو (10 کیلومتر)
+                        const radius = 10;
+
+                        // نمایش مکان فعلی کاربر روی نقشه
+                        const userLocationMarker = L.marker([userLat, userLng]).addTo(map);
+                        userLocationMarker.bindPopup('Your Location').openPopup();
+
+                        // ارسال مختصات و شعاع به سرور با jQuery AJAX
+                        $.ajax({
+                            url: '<?= MAP_URL . 'process/get_locations.php' ?>', // فایل سرور برای دریافت مکان‌های نزدیک
+                            method: 'POST',
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            data: JSON.stringify({
+                                latitude: userLat,
+                                longitude: userLng,
+                                radius: radius
+                            }),
+                            success: function (locations) {
+                                console.log('Nearby Locations:', locations);
+                                // نمایش مکان‌های نزدیک روی نقشه
+                                locations.forEach(function (location) {
+                                    const marker = L.marker([location.lat, location.lng]).addTo(map);
+                                    marker.bindPopup(location.title);
+                                });
+                            },
+                            error: function (xhr, status, error) {
+                                console.error('Error fetching locations:', error);
+                            }
+                        });
+                    });
+                } else {
+                    alert('Geolocation is not supported by this browser.');
+                }
+            });
+
             $("#search").keyup(function(e){
                 const input = $(this);
                 const titleSearch = input.val();
@@ -202,9 +204,14 @@
                         }
                     });
             });
-            // $("img.currentLoc").click(function(){
-            //     locate();
-            // });
+
+            $("img.currentLoc").click(function(){
+                locate();
+            });
+
+
+
+
         });
     </script>
 </body>

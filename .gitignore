@@ -1,2 +1,5 @@
+# Ignore vendor directory (for Composer dependencies)
 vendor/
-composer.lock/
+
+# Ignore composer.lock (if you don't want to track this file)
+composer.lock
